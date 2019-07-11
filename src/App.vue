@@ -14,6 +14,7 @@
 
 <style>
 @import url("https://fonts.googleapis.com/css?family=Nanum+Gothic&display=swap");
+
 .page-enter-active,
 .page-leave-active {
     position: absolute;
@@ -28,6 +29,17 @@
     transform: scale(1.1);
     opacity: 0;
 }
+
+::-webkit-scrollbar{
+    width: 5px;
+}
+::-webkit-scrollbar-track{
+    background-color: rgba(125, 115, 98,0.2);
+}
+::-webkit-scrollbar-thumb{
+    background: #FCD237;
+}
+
 * {
     font-family: "Nanum Gothic", sans-serif;
     -webkit-font-smoothing: antialiased;
@@ -59,9 +71,11 @@
     box-shadow: 0px 2px 10px 0px rgba(0, 0, 0, 0.2);
 }
 #content {
+    flex: 1;
     position: relative;
     width: 100%;
-    flex: 1;
+    overflow: hidden;
+    overflow-y: scroll;
 }
 
 .header__title {
