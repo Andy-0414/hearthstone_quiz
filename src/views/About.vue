@@ -15,7 +15,13 @@
           :key="index"
         ></OptionButton>
       </div>
-      <div class="informationPanel"></div>
+      <div class="informationPanel">
+        <div class="informationPanel__score">{{score}}</div>
+        <div class="informationPanel__round">
+          <div id="roundBar"></div>
+          <div id="scoreBar"></div>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -31,6 +37,8 @@ export default Vue.extend({
       cards: [] as any[],
       wait: false,
       score: 0,
+      round: 0,
+      totalRound: 10,
       quizTypes: ["image", "name", "text", "cost"],
       optionCnt: 5,
       answerCard: {} as Card,
@@ -46,6 +54,7 @@ export default Vue.extend({
   },
   methods: {
     startGame() {
+      this.round++;
       this.wait = false;
       let cardManager = CardManager.getCardManager();
 
@@ -54,17 +63,23 @@ export default Vue.extend({
       this.optionCards = cardManager.getRandomCards(4);
     },
     selectAnswer(index: number) {
-      if (this.wait == false) {
+        console.log(index,this.answerIndex,this.round)      
+      if (this.wait == false && this.round <= this.totalRound) {
         this.wait = true;
+        var roundBar: any = document.getElementById("roundBar");
+        roundBar.style.width = (this.round / this.totalRound) * 100 + "%";
         setTimeout(this.startGame, 1000);
         if (index == this.answerIndex) {
           this.score++;
+          var scoreBar: any = document.getElementById("scoreBar");
+          scoreBar.style.width = (this.score / this.totalRound) * 100 + "%";
         } else {
         }
       }
     }
   },
   computed: {
+    //TODO: 판정 오류가 있음
     getOptionList(): Card[] {
       let output: Card[] = this.optionCards;
       output.splice(this.answerIndex, 0, this.answerCard);
@@ -112,11 +127,38 @@ export default Vue.extend({
 
   margin: 10px 0;
 }
-.informationPanel{
+.informationPanel {
   width: 80vw;
   height: 30px;
   margin-top: 30px;
+  display: flex;
+  align-items: center;
+}
+.informationPanel__score {
+  font-size: 1.5em;
+  font-weight: bold;
+}
+.informationPanel__round {
+  flex: 1;
+  width: 100%;
+  height: 15px;
+  margin-left: 10px;
 
-  background-color: #7e7463;
+  display: flex;
+  flex-direction: column;
+}
+.informationPanel__round #roundBar {
+  width: 0;
+  height: 10px;
+  background: #fcd237;
+
+  transition: 0.5s;
+}
+.informationPanel__round #scoreBar {
+  width: 0;
+  height: 5px;
+  background: #eda115;
+
+  transition: 0.5s;
 }
 </style>
