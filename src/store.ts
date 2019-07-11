@@ -10,7 +10,8 @@ export default new Vuex.Store({
   state: {
     quizOption: {
       totalRound: 10,
-      optionCnt: 5
+      optionCnt: 5,
+      type: "name"
     } as quizOption,
     score: 0
   },

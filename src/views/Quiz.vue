@@ -9,13 +9,23 @@
           @load="imageLoadClear"
         />
       </h1>
-      <div class="hearthstone__card__option">
+      <div class="hearthstone__card__option" v-if="type == 'name'">
         <OptionButton
           @click="selectAnswer(index)"
           :text="item.name"
           :highlight="isWait && index==answerIndex"
           class="item"
-          v-for="(item, index) in getOptionList"
+          v-for="(item, index) in getOptionListName"
+          :key="index"
+        ></OptionButton>
+      </div>
+      <div class="hearthstone__card__option" v-if="type == 'cost'">
+        <OptionButton
+          @click="selectAnswer(index)"
+          :text="item.toString()"
+          :highlight="isWait && index==answerIndex"
+          class="item"
+          v-for="(item, index) in getOptionListCost"
           :key="index"
         ></OptionButton>
       </div>
@@ -42,9 +52,10 @@ export default Vue.extend({
       isImageLoad: false,
       score: 0,
       round: 0,
-      totalRound: this.$store.state.quizOption.totalRound,
       quizTypes: ["image", "name", "text", "cost"],
+      totalRound: this.$store.state.quizOption.totalRound,
       optionCnt: this.$store.state.quizOption.optionCnt,
+      type: this.$store.state.quizOption.type,
       answerCard: {} as Card,
       answerIndex: 0 as number,
       optionCards: [] as Card[]
@@ -92,10 +103,15 @@ export default Vue.extend({
   },
   computed: {
     //TODO: 판정 오류가 있음
-    getOptionList(): Card[] {
+    getOptionListName(): Card[] {
       let output: Card[] = this.optionCards;
       output.splice(this.answerIndex, 0, this.answerCard);
       return output;
+    },
+    getOptionListCost(): number[] {
+      let output: number[] = CardManager.getCardManager().getRandomCostExclusion(this.answerCard.cost)
+      output.splice(this.answerIndex, 0, this.answerCard.cost);
+      return output
     }
   }
 });

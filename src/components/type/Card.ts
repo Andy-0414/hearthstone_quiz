@@ -5,11 +5,13 @@ export class Card {
     public name: string;
     public attack: number;
     public health: number;
+    public cost: number;
     constructor(cardJson: any) {
         this.id = cardJson.id || "none";
         this.name = cardJson.name || "none";
         this.attack = cardJson.attack || 0;
         this.health = cardJson.health || 0;
+        this.cost = cardJson.cost || -1;
     }
     getImageUrl(): string {
         return `https://art.hearthstonejson.com/v1/256x/${this.id}.jpg`
@@ -71,7 +73,7 @@ export class CardManager {
         }
         return output;
     }
-    getRandomCard(): Card {
+    public getRandomCard(): Card {
         let randomIndex: number = this.getRandom(this.cardList.length);
         while (this.pullCards.indexOf(randomIndex) != -1) {
             randomIndex = this.getRandom(this.cardList.length)
@@ -79,10 +81,17 @@ export class CardManager {
         this.pullCards.push(randomIndex)
         return this.cardList[randomIndex]
     }
-    getRandomCards(count:number): Card[] {
+    public getRandomCards(count: number): Card[] {
         let output: Card[] = []
-        for(let i = 0; i < count; i++){
+        for (let i = 0; i < count; i++) {
             output.push(this.getRandomCard())
+        }
+        return output
+    }
+    public getRandomCostExclusion(exclusionCost: number): number[] {
+        let output: number[] = this.getRandoms(10, 4)
+        while (output.indexOf(exclusionCost) != -1) {
+            output = this.getRandoms(10, 4)
         }
         return output
     }

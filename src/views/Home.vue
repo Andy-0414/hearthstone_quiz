@@ -1,18 +1,18 @@
 <template>
   <div class="home">
-    <Card class="quizCard" @click="quiz(10)">
+    <Card class="quizCard" @click="quiz(10,'name')">
       <template slot="content">
         <span class="quizCard__text">
           하스스톤
-          <br />10문제
+          <br />이름 맞추기
         </span>
       </template>
     </Card>
-    <Card class="quizCard" @click="quiz(30)">
+    <Card class="quizCard" @click="quiz(10,'cost')">
       <template slot="content">
         <span class="quizCard__text">
           하스스톤
-          <br />30문제
+          <br />코스트 맞추기
         </span>
       </template>
     </Card>
@@ -26,10 +26,11 @@ export default Vue.extend({
     Card
   },
   methods: {
-    quiz(totalRound: number) {
+    quiz(totalRound: number, type: string) {
       this.$store.commit("setQuizOption", {
         totalRound: totalRound,
-        optionCnt: 5
+        optionCnt: 5,
+        type: type
       });
       this.$router.push("/quiz");
     }
