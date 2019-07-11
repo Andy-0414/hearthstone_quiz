@@ -1,15 +1,13 @@
 <template>
-  <button @click="onclick(optionIndex)" :class="'option__button '+(highlight ? 'option__button-highlight':'')">{{text}}</button>
+  <button @click="$emit('click')" :class="'option__button '+(highlight ? 'option__button-highlight':'')">{{text}}</button>
 </template>
 
 <script lang="ts">
 import Vue from "vue";
 export default Vue.extend({
   props: {
-    onclick: Function,
     text: String,
     highlight: Boolean,
-    optionIndex: Number
   }
 });
 </script>

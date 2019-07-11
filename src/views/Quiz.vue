@@ -2,21 +2,25 @@
   <div class="quiz" v-if="answerCard">
     <div class="hearthstone__card">
       <h1 class="hearthstone__card__answer">
-        <img :src="answerCard.getImageUrl()" class="hearthstone__card__answer__image" />
+        <img
+          :class="isImageLoad ? '':'loading'"
+          :src="answerCard.getImageUrl()"
+          class="hearthstone__card__answer__image"
+          @load="imageLoadClear"
+        />
       </h1>
       <div class="hearthstone__card__option">
         <OptionButton
-          :onclick="selectAnswer"
-          :optionIndex="index"
+          @click="selectAnswer(index)"
           :text="item.name"
-          :highlight="wait && index==answerIndex"
+          :highlight="isWait && index==answerIndex"
           class="item"
           v-for="(item, index) in getOptionList"
           :key="index"
         ></OptionButton>
       </div>
       <div class="informationPanel">
-        <div class="informationPanel__score">{{score}}</div>
+        <div class="informationPanel__score">{{score}}/{{totalRound}}</div>
         <div class="informationPanel__round">
           <div id="roundBar"></div>
           <div id="scoreBar"></div>
@@ -34,13 +38,13 @@ import { Card, CardManager } from "../components/type/Card";
 export default Vue.extend({
   data() {
     return {
-      cards: [] as any[],
-      wait: false,
+      isWait: false,
+      isImageLoad: false,
       score: 0,
       round: 0,
-      totalRound: 10,
+      totalRound: this.$store.state.quizOption.totalRound,
       quizTypes: ["image", "name", "text", "cost"],
-      optionCnt: 5,
+      optionCnt: this.$store.state.quizOption.optionCnt,
       answerCard: {} as Card,
       answerIndex: 0 as number,
       optionCards: [] as Card[]
@@ -53,22 +57,30 @@ export default Vue.extend({
     this.startGame();
   },
   methods: {
-    startGame() {
-      this.round++;
-      this.wait = false;
-      let cardManager = CardManager.getCardManager();
-
-      this.answerIndex = cardManager.getRandom(this.optionCnt);
-      this.answerCard = cardManager.getRandomCard();
-      this.optionCards = cardManager.getRandomCards(4);
+    imageLoadClear(): void {
+      this.isImageLoad = true;
     },
-    selectAnswer(index: number) {
-        console.log(index,this.answerIndex,this.round)      
-      if (this.wait == false && this.round <= this.totalRound) {
-        this.wait = true;
+    startGame(): void {
+      if (this.round < this.totalRound) {
+        this.isImageLoad = false;
+        this.round++;
+        this.isWait = false;
+        let cardManager = CardManager.getCardManager();
+
+        this.answerIndex = cardManager.getRandom(this.optionCnt - 1);
+        this.answerCard = cardManager.getRandomCard();
+        this.optionCards = cardManager.getRandomCards(this.optionCnt - 1);
+      } else {
+        this.$store.commit("setScore", this.score);
+        this.$router.push("/clear")
+      }
+    },
+    selectAnswer(index: number): void {
+      if (this.isWait == false) {
+        this.isWait = true;
         var roundBar: any = document.getElementById("roundBar");
         roundBar.style.width = (this.round / this.totalRound) * 100 + "%";
-        setTimeout(this.startGame, 1000);
+        setTimeout(this.startGame, 500);
         if (index == this.answerIndex) {
           this.score++;
           var scoreBar: any = document.getElementById("scoreBar");
@@ -106,6 +118,7 @@ export default Vue.extend({
 }
 .hearthstone__card__answer {
   border: 3px solid #7e7463;
+  background-color: #7e7463;
   border-radius: 50%;
   overflow: hidden;
 
@@ -115,6 +128,14 @@ export default Vue.extend({
 
   width: 200px;
   height: 200px;
+}
+.hearthstone__card__answer img {
+  border-radius: 50%;
+  transition: 0.2s;
+}
+.hearthstone__card__answer .loading {
+  opacity: 0;
+  transform: scale(0);
 }
 .hearthstone__card__option {
   width: 300px;
