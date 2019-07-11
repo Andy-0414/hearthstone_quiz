@@ -36,6 +36,8 @@
   align-items: center;
   padding: 0px 40px;
 
+  color: white;
+  background-color: #EDA115;
   box-shadow: 0px 2px 10px 0px rgba(0, 0, 0, 0.2)
 }
 #content {
