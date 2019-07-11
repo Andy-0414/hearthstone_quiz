@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <header id="header">
-      <h1 class="header__title">Hearth stone Quiz</h1>
+      <h1 class="header__title">HearthStrone Quiz</h1>
       <nav></nav>
     </header>
     <section id="content">
@@ -13,6 +13,13 @@
 </template>
 
 <style>
+@import url('https://fonts.googleapis.com/css?family=Nanum+Gothic&display=swap');
+@font-face {
+    font-family: YD;
+    src: url("./assets/2002.ttf") format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
 .page-enter-active,
 .page-leave-active {
   position: absolute;
@@ -28,7 +35,7 @@
   opacity: 0;
 }
 * {
-  font-family: "Avenir", Helvetica, Arial, sans-serif;
+font-family: 'Nanum Gothic', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 

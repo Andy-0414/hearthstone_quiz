@@ -1,21 +1,3 @@
-# hearthstone
-
-## Project setup
-```
-npm install
-```
-
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
-
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
+# HearthStrone Quiz
+평소에 hearthstone 이라는 게임을 즐겨하는데, 이 게임에 관한 API가 있어서
+https://hearthstonejson.com/ 를 참고하여  카드 문제 사이트를 Vue.js+Typescript를 사용하여 만들었습니다.

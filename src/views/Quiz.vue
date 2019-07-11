@@ -30,7 +30,8 @@
         ></OptionButton>
       </div>
       <div class="informationPanel">
-        <div class="informationPanel__score">{{score}}/{{totalRound}}</div>
+        <div class="informationPanel__score">ROUND : {{round}}<br>
+        {{score}}/{{totalRound}}</div>
         <div class="informationPanel__round">
           <div id="roundBar"></div>
           <div id="scoreBar"></div>
@@ -174,6 +175,7 @@ export default Vue.extend({
 .informationPanel__score {
   font-size: 1.5em;
   font-weight: bold;
+  color: #2C2319;
 }
 .informationPanel__round {
   flex: 1;

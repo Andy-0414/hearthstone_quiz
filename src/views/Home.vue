@@ -3,16 +3,16 @@
     <Card class="quizCard" @click="quiz(10,'name')">
       <template slot="content">
         <span class="quizCard__text">
-          하스스톤
-          <br />이름 맞추기
+          카드 이름
+          <br />맞추기
         </span>
       </template>
     </Card>
     <Card class="quizCard" @click="quiz(10,'cost')">
       <template slot="content">
         <span class="quizCard__text">
-          하스스톤
-          <br />코스트 맞추기
+          카드 코스트
+          <br />맞추기
         </span>
       </template>
     </Card>
