@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <header id="header">
-      <h1 class="header__title">Hearth stone Card Viewer</h1>
+      <h1 class="header__title">Hearth stone Quiz</h1>
       <nav></nav>
     </header>
     <section id="content">
