@@ -86,6 +86,11 @@ export class CardManager {
         }
         return output
     }
+    /**
+     * @description 뽑은 카드 리스트 초기화
+     *
+     * @memberof CardManager
+     */
     resetPullCardsIndex(): void {
         this.cardList = []
     }

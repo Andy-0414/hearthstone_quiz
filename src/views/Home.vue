@@ -46,6 +46,8 @@ export default Vue.extend({
   align-items: center;
 }
 .quizCard {
+  cursor: pointer;
+
   width: 300px;
   height: 400px;
 
