@@ -31,7 +31,7 @@ export default Vue.extend({
         totalRound: totalRound,
         optionCnt: 5
       });
-        this.$router.push("/quiz")
+      this.$router.push("/quiz");
     }
   }
 });
@@ -44,6 +44,8 @@ export default Vue.extend({
   display: flex;
   justify-content: center;
   align-items: center;
+
+  flex-wrap: wrap;
 }
 .quizCard {
   cursor: pointer;
