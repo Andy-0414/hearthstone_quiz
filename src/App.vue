@@ -1,7 +1,7 @@
 <template>
     <div id="app">
         <header id="header">
-            <h1 class="header__title">HearthStrone Quiz</h1>
+            <h1 class="header__title" @click="gotoHearthstoneQuiz">HearthStrone Quiz</h1>
             <nav></nav>
         </header>
         <section id="content">
@@ -11,6 +11,18 @@
         </section>
     </div>
 </template>
+
+<script lang="ts">
+import Vue from 'vue'
+export default Vue.extend({
+    methods:{
+        gotoHearthstoneQuiz(){
+            this.$router.replace("/")
+        }
+    }
+})
+</script>
+
 
 <style>
 @import url("https://fonts.googleapis.com/css?family=Nanum+Gothic&display=swap");
