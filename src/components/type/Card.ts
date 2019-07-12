@@ -88,10 +88,10 @@ export class CardManager {
         }
         return output
     }
-    public getRandomCostExclusion(exclusionCost: number): number[] {
-        let output: number[] = this.getRandoms(10, 4)
+    public getRandomCostExclusion(exclusionCost: number, c: number): number[] {
+        let output: number[] = this.getRandoms(10, c)
         while (output.indexOf(exclusionCost) != -1) {
-            output = this.getRandoms(10, 4)
+            output = this.getRandoms(10, c)
         }
         return output
     }

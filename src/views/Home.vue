@@ -1,6 +1,6 @@
 <template>
     <div class="home">
-        <Card class="quizCard" @click="quiz(10,'name')">
+        <Card class="quizCard" @click="quiz(30,'name')">
             <template slot="content">
                 <span class="quizCard__text">
                     카드 이름
@@ -8,7 +8,7 @@
                 </span>
             </template>
         </Card>
-        <Card class="quizCard" @click="quiz(10,'cost')">
+        <Card class="quizCard" @click="quiz(30,'cost')">
             <template slot="content">
                 <span class="quizCard__text">
                     카드 코스트
