@@ -19,5 +19,4 @@
 - 카드 코스트 맞추기
 
 ## 관련 레포지토리
-- [backend](https://github.com/Andy-0414/Sandbox_Tables_Backend)
 - [API](https://hearthstonejson.com/)
